@@ -1,0 +1,48 @@
+[
+  {
+    "substringToReplace": "u",
+    "substringToReplaceWith": "ó",
+    "occurrenceProbability": 0.8
+  },
+  {
+    "substringToReplace": "ó",
+    "substringToReplaceWith": "u",
+    "occurrenceProbability": 0.8
+  },
+  {
+    "substringToReplace": "ch",
+    "substringToReplaceWith": "h",
+    "occurrenceProbability": 0.8
+  },
+  {
+    "substringToReplace": "h",
+    "substringToReplaceWith": "ch",
+    "occurrenceProbability": 0.8
+  },
+  {
+    "substringToReplace": "rz",
+    "substringToReplaceWith": "ż",
+    "occurrenceProbability": 0.8
+  },
+  {
+    "substringToReplace": "ż",
+    "substringToReplace": "ż",
+    "substringToReplaceWith": "rz",
+    "occurrenceProbability": 0.8
+  },
+  {
+    "substringToReplace": "ź",
+    "substringToReplaceWith": "z",
+    "occurrenceProbability": 0.8
+  },
+  {
+    "substringToReplace": "ś",
+    "substringToReplaceWith": "s",
+    "occurrenceProbability": 0.8
+  },
+  {
+    "substringToReplace": "ć",
+    "substringToReplaceWith": "c",
+    "occurrenceProbability": 0.8
+  }
+]
