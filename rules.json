@@ -26,7 +26,6 @@
   },
   {
     "substringToReplace": "ż",
-    "substringToReplace": "ż",
     "substringToReplaceWith": "rz",
     "occurrenceProbability": 0.8
   },

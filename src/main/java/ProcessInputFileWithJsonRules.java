@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 @Builder
@@ -37,18 +38,27 @@ public class ProcessInputFileWithJsonRules implements InputFileProcessor {
     }
 
     @Override
-    public String applyRules(String originalSentence, List<Rule> rules) {
-        StringBuilder sentenceWithError = new StringBuilder(originalSentence);
+    public String applyRules(String originalSentence, List<Rule> rules) throws IOException {
+
+        //        Generating errors from confusion set
+        SpellCandidateGenerator spellCandidateGenerator = new SpellCandidateGenerator();
+        StringBuilder originalSentenceCopy = new StringBuilder(spellCandidateGenerator.generateSentenceWithReplacedWord(originalSentence));
+
+        //        Generating spelling errors from rules
+        List<Integer> startingPositionsList = new ArrayList<Integer>();
         for (Rule rule : rules) {
             String substringToReplace = rule.getSubstringToReplace();
             String substringToReplaceWith = rule.getSubstringToReplaceWith();
-            int startingPosition = originalSentence.indexOf(rule.getSubstringToReplace());
+            int startingPosition = originalSentenceCopy.indexOf(rule.getSubstringToReplace());
             int endPosition = startingPosition + substringToReplace.length();
-            if(startingPosition > 0 && sentenceWithError.charAt(startingPosition) == originalSentence.charAt(startingPosition)) {
-                sentenceWithError.replace(startingPosition, endPosition, substringToReplaceWith);
+            if (startingPosition > 0 && !startingPositionsList.contains(startingPosition)) {
+                originalSentenceCopy.replace(startingPosition, endPosition, substringToReplaceWith);
             }
-
+            startingPositionsList.add(startingPosition);
         }
-        return sentenceWithError.toString();
+
+        SpellingErrorsGenerator spellingErrorsGenerator = new SpellingErrorsGenerator();
+        return spellingErrorsGenerator.transformSentence(originalSentenceCopy.toString());
     }
+
 }
